@@ -7,6 +7,7 @@ public class InterparkBook {
 	private String translator;
 	private String company;
 	private int price;
+	
 	public InterparkBook() { }
 	public InterparkBook(int rank, String title, String author, String translator, String company, int price) {
 		this.rank = rank;
@@ -16,6 +17,9 @@ public class InterparkBook {
 		this.company = company;
 		this.price = price;
 	}
+	
+	// translator가 없으면 출력하지 않고
+	// 금액에 천단위 구분기호 추가
 	@Override
 	public String toString() {
 		return "InterparkBook [rank=" + rank + ", title=" + title + ", author=" + author 
@@ -23,6 +27,7 @@ public class InterparkBook {
 				+ ", company=" + company 
 				+ ", price=" + String.format("%,d", price) + "]";
 	}
+	
 	public int getRank() {
 		return rank;
 	}
