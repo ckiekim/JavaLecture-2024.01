@@ -44,11 +44,6 @@ public class ReplyDao {
 		}
 	}
 	
-	public Reply getReply(int rid) {
-		
-		return null;
-	}
-	
 	public List<Reply> getReplyList(int bid) {
 		String sql = "SELECT r.*, u.uname FROM reply r"
 					+ "	JOIN users u ON r.uid=u.uid"
