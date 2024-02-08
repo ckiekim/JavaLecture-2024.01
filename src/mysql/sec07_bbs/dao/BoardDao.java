@@ -3,6 +3,9 @@ package mysql.sec07_bbs.dao;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
 
@@ -41,8 +44,25 @@ public class BoardDao {
 	}
 	
 	public Board getBoard(int bid) {
-		
-		return null;
+		String sql = "SELECT b.*, u.uname FROM board b"
+					+ "	JOIN users u ON b.uid=u.uid"
+					+ "	WHERE b.bid=?";
+		Board board = null;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+						LocalDateTime.parse(rs.getString(5).replace(" ", "T")),
+						rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+			}
+			rs.close(); pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return board;
 	}
 
 	// field 값은 title, content, uid 등 attribute name

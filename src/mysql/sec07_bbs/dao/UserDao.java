@@ -86,7 +86,7 @@ public class UserDao {
 	}
 	
 	public void insertUser(User user) {
-		String sql = "insert users values (?, ?, ?, ?, default, default)";
+		String sql = "insert into users values (?, ?, ?, ?, default, default)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getUid());
